@@ -25,13 +25,13 @@ class ProductCard extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: EdgeInsets.all(10),
+            padding: const EdgeInsets.all(10),
             child: Column(
               children: [
                 //Product Name
                 Text(
                 product.productName.toString(),
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 16,
                   color: Colors.black,
                 ),
@@ -39,7 +39,7 @@ class ProductCard extends StatelessWidget {
                 //Product Price
                 Text(
                   'Price: ${product.unitPrice} | Qty: ${product.qty}',
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 16,
                   color: Colors.black,
                 ),
