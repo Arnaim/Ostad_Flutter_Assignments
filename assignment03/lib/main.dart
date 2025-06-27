@@ -137,50 +137,65 @@ class _CrudProducts extends State<ProductApp> {
         backgroundColor: Colors.yellow,
         centerTitle: true,
       ),
+
       floatingActionButton: FloatingActionButton(
         onPressed: ()=>productDialog(isUpdate: false),
         child: const Icon(Icons.add),
       ),
-      body: GridView.builder(
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          crossAxisSpacing: 20,
-          childAspectRatio: 0.8,
-        ),
-        itemCount: productcontroller.products.length,
-        itemBuilder: (context, index) {
-          var product = productcontroller.products[index];
-          return ProductCard(
-            onEdit: (){productDialog(name:product.productName, img:product.img, qty:product.qty, id:product.sId, unitPrice:product.unitPrice, totalPrice:product.totalPrice, isUpdate: true);},
-            onDelete: () {
-              productcontroller
-                  .DeleteProducts(product.sId.toString())
-                  .then((value) async {
-                if (value) {
-                  await productcontroller.FetchProducts();
-                  setState(() {});
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text('Product Deleted'),
-                      duration: Duration(seconds: 2),
-                    ),
+        
+        body: Padding(
+          padding: const EdgeInsets.all(10), 
+          child: GridView.builder(
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              crossAxisSpacing: 20, 
+              mainAxisSpacing: 20,  
+              childAspectRatio: 0.7,
+            ),
+            itemCount: productcontroller.products.length,
+            itemBuilder: (context, index) {
+              var product = productcontroller.products[index];
+              return ProductCard(
+                onEdit: () {
+                  productDialog(
+                    name: product.productName,
+                    img: product.img,
+                    qty: product.qty,
+                    id: product.sId,
+                    unitPrice: product.unitPrice,
+                    totalPrice: product.totalPrice,
+                    isUpdate: true,
                   );
-                } else {
-                  setState(() {});
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text('Something went wrong... Try again?'),
-                      duration: Duration(seconds: 2),
-                    ),
-                  );
-                }
-              }
-             );
+                },
+                onDelete: () {
+                  productcontroller
+                      .DeleteProducts(product.sId.toString())
+                      .then((value) async {
+                    if (value) {
+                      await productcontroller.FetchProducts();
+                      setState(() {});
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text('Product Deleted'),
+                          duration: Duration(seconds: 2),
+                        ),
+                      );
+                    } else {
+                      setState(() {});
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text('Something went wrong... Try again?'),
+                          duration: Duration(seconds: 2),
+                        ),
+                      );
+                    }
+                  });
+                },
+                product: product,
+              );
             },
-            product: product,
-          );
-        },
-      ),
-    );
-  }
-}
+          ),
+        ),
+      );
+     }
+    }

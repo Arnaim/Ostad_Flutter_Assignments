@@ -12,14 +12,20 @@ class ProductCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+        decoration: BoxDecoration(
+        border: Border.all(
+          color: Colors.grey, 
+          width: 1.5,
+        ),
+        borderRadius: BorderRadius.circular(20),
+      ),
       child: Column(
         children: [
           SizedBox(
-            height: 140,
-            
+            height: 100,
             child: Image.network(
               product.img.toString(),
-              height: 100,
+              height: 90,
               fit: BoxFit.cover,
               errorBuilder: (context, error, stackTrace) => const Icon(Icons.broken_image),
             ),
@@ -32,15 +38,15 @@ class ProductCard extends StatelessWidget {
                 Text(
                 product.productName.toString(),
                 style: const TextStyle(
-                  fontSize: 16,
+                  fontSize: 13,
                   color: Colors.black,
                 ),
                 ),
-                //Product Price
+                //Product Price and Quantity
                 Text(
                   'Price: ${product.unitPrice} | Qty: ${product.qty}',
                 style: const TextStyle(
-                  fontSize: 16,
+                  fontSize: 11,
                   color: Colors.black,
                 ),
                 )
@@ -54,10 +60,12 @@ class ProductCard extends StatelessWidget {
             children: [
               IconButton(onPressed: onEdit, icon: const Icon(Icons.edit, color: Colors.orange,)),
               const SizedBox(width: 5,),
-              IconButton(onPressed: onDelete, icon: const Icon(Icons.delete, color: Colors.red,)),
+              IconButton(onPressed: onDelete, icon: const Icon(Icons.delete, color: Colors.red,)),   
             ],
-          )
-        )
+          ),
+          
+        ),
+       
       ],
       )
     );
