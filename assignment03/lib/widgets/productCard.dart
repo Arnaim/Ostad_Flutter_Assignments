@@ -46,7 +46,7 @@ class ProductCard extends StatelessWidget {
                 Text(
                   'Price: ${product.unitPrice} | Qty: ${product.qty}',
                 style: const TextStyle(
-                  fontSize: 11,
+                  fontSize: 13,
                   color: Colors.black,
                 ),
                 )
